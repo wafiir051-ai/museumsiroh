@@ -188,10 +188,7 @@ export default function LandingPage() {
       </section>
 
       <footer className="border-t border-siroh-ink/10 py-8 text-center text-sm text-siroh-ink/50 dark:border-white/10 dark:text-white/50">
-        <p>© {new Date().getFullYear()} Museum Siroh — Program Mitra Afiliasi</p>
-        <Link to="/admin/login" className="mt-2 inline-block text-xs text-siroh-ink/30 hover:text-siroh-ink/50 dark:text-white/30 dark:hover:text-white/50">
-          Login Admin
-        </Link>
+        © {new Date().getFullYear()} Museum Siroh — Program Mitra Afiliasi
       </footer>
     </div>
   )
