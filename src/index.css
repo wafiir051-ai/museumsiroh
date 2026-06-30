@@ -7,6 +7,16 @@
     scroll-behavior: smooth;
   }
 
+  :root {
+    --chart-grid: #1B4D3E1A;
+    --chart-text: #0F2C2299;
+  }
+
+  .dark {
+    --chart-grid: #FFFFFF26;
+    --chart-text: #FFFFFFB3;
+  }
+
   body {
     @apply bg-siroh-paper text-siroh-ink font-body antialiased transition-colors duration-200;
   }
