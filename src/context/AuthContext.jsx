@@ -30,7 +30,10 @@ export function AuthProvider({ children }) {
           const pending = JSON.parse(pendingRaw)
           const { data: newAff } = await supabase
             .from('affiliates')
-            .insert({ user_id: userId, email: authUser?.email, ...pending })
+            .upsert(
+              { user_id: userId, email: authUser?.email, ...pending },
+              { onConflict: 'user_id', ignoreDuplicates: false }
+            )
             .select('*, tiers(name, commission_rate, badge_color, perks)')
             .single()
           sessionStorage.removeItem('siroh_pending')
@@ -46,7 +49,10 @@ export function AuthProvider({ children }) {
           const fullName = meta.full_name || meta.name || authUser.email?.split('@')[0] || 'Mitra Baru'
           const { data: newAff, error: createError } = await supabase
             .from('affiliates')
-            .insert({ user_id: userId, email: authUser.email, full_name: fullName })
+            .upsert(
+              { user_id: userId, email: authUser.email, full_name: fullName },
+              { onConflict: 'user_id', ignoreDuplicates: false }
+            )
             .select('*, tiers(name, commission_rate, badge_color, perks)')
             .single()
           if (createError) {
