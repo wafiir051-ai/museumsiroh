@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { supabase } from '@/lib/supabase'
-import { ScrollText, Mail, Lock, User, ArrowRight, AlertCircle } from 'lucide-react'
+import Logo from '@/components/Logo'
+import { Mail, Lock, User, ArrowRight, AlertCircle } from 'lucide-react'
 
 export default function AdminSetupPage() {
   const navigate = useNavigate()
@@ -48,40 +49,39 @@ export default function AdminSetupPage() {
   }
 
   if (checking) return (
-    <div className="flex min-h-screen items-center justify-center bg-siroh-paper">
-      <div className="h-10 w-10 animate-spin rounded-full border-4 border-siroh-gold border-t-transparent" />
+    <div className="flex min-h-screen items-center justify-center bg-siroh-paper dark:bg-siroh-charcoal">
+      <div className="h-10 w-10 animate-spin rounded-full border-4 border-siroh-orange border-t-transparent" />
     </div>
   )
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-siroh-paper lattice-bg px-6">
+    <div className="flex min-h-screen items-center justify-center bg-siroh-paper lattice-bg px-6 dark:bg-siroh-charcoal">
       <div className="w-full max-w-sm">
         <div className="mb-8 flex items-center justify-center gap-2">
-          <ScrollText className="h-6 w-6 text-siroh-gold" />
-          <span className="font-display text-lg font-semibold">Siroh Admin Setup</span>
+          <Logo className="h-8" showText />
         </div>
         <div className="card p-8">
           <h1 className="font-display text-2xl font-semibold">Buat Admin Pertama</h1>
-          <p className="mt-1 text-sm text-siroh-ink/60">Halaman ini hanya muncul sekali sebelum ada admin.</p>
+          <p className="mt-1 text-sm text-siroh-ink/60 dark:text-white/60">Halaman ini hanya muncul sekali sebelum ada admin.</p>
           <form onSubmit={handleSubmit} className="mt-6 space-y-4">
             <div>
-              <label className="mb-1.5 block text-sm font-medium text-siroh-ink/80">Nama Lengkap</label>
+              <label className="mb-1.5 block text-sm font-medium text-siroh-ink/80 dark:text-white/80">Nama Lengkap</label>
               <div className="relative">
-                <User className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-siroh-ink/40" />
+                <User className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-siroh-ink/40 dark:text-white/40" />
                 <input required value={form.fullName} onChange={set('fullName')} className="input-field pl-11" placeholder="Nama admin" />
               </div>
             </div>
             <div>
-              <label className="mb-1.5 block text-sm font-medium text-siroh-ink/80">Email</label>
+              <label className="mb-1.5 block text-sm font-medium text-siroh-ink/80 dark:text-white/80">Email</label>
               <div className="relative">
-                <Mail className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-siroh-ink/40" />
+                <Mail className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-siroh-ink/40 dark:text-white/40" />
                 <input type="email" required value={form.email} onChange={set('email')} className="input-field pl-11" placeholder="admin@email.com" />
               </div>
             </div>
             <div>
-              <label className="mb-1.5 block text-sm font-medium text-siroh-ink/80">Kata Sandi</label>
+              <label className="mb-1.5 block text-sm font-medium text-siroh-ink/80 dark:text-white/80">Kata Sandi</label>
               <div className="relative">
-                <Lock className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-siroh-ink/40" />
+                <Lock className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-siroh-ink/40 dark:text-white/40" />
                 <input type="password" required value={form.password} onChange={set('password')} className="input-field pl-11" placeholder="Minimal 6 karakter" />
               </div>
             </div>
