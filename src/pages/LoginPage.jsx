@@ -125,7 +125,7 @@ export default function LoginPage() {
             </Link>
           </p>
         </div>
-        <Link to="/admin/login" className="mt-4 block text-center text-xs text-siroh-ink/30 hover:text-siroh-ink/50 dark:text-white/30 dark:hover:text-white/50">
+        <Link to="/admin/login" className="mt-4 block text-center text-sm font-medium text-siroh-ink/60 hover:text-siroh-teal dark:text-white/60 dark:hover:text-siroh-teal">
           Login Admin
         </Link>
       </div>
