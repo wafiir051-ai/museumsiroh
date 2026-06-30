@@ -99,7 +99,7 @@ export default function WithdrawPage() {
     <div className="space-y-8">
       <div>
         <h1 className="font-display text-2xl font-semibold">Penarikan Komisi</h1>
-        <p className="mt-1 text-sm text-siroh-ink/60">Ajukan penarikan komisi ke rekening bankmu.</p>
+        <p className="mt-1 text-sm text-siroh-ink/60 dark:text-white/60">Ajukan penarikan komisi ke rekening bankmu.</p>
       </div>
 
       <div className="card flex items-center gap-4 p-6">
@@ -107,7 +107,7 @@ export default function WithdrawPage() {
           <Banknote className="h-5 w-5 text-siroh-gold" />
         </div>
         <div>
-          <p className="text-xs text-siroh-ink/55">Saldo Tersedia untuk Ditarik</p>
+          <p className="text-xs text-siroh-ink/55 dark:text-white/55">Saldo Tersedia untuk Ditarik</p>
           <p className="font-display text-2xl font-semibold text-siroh-green">{formatRupiah(availableBalance)}</p>
         </div>
       </div>
@@ -117,7 +117,7 @@ export default function WithdrawPage() {
           <h2 className="font-display text-lg font-semibold">Ajukan Penarikan</h2>
           <form onSubmit={handleSubmit} className="mt-4 space-y-4">
             <div>
-              <label className="mb-1.5 block text-sm font-medium text-siroh-ink/80">Jumlah Penarikan</label>
+              <label className="mb-1.5 block text-sm font-medium text-siroh-ink/80 dark:text-white/80">Jumlah Penarikan</label>
               <input
                 type="number"
                 min={MIN_WITHDRAW}
@@ -128,7 +128,7 @@ export default function WithdrawPage() {
               />
             </div>
             <div>
-              <label className="mb-1.5 block text-sm font-medium text-siroh-ink/80">Nama Bank</label>
+              <label className="mb-1.5 block text-sm font-medium text-siroh-ink/80 dark:text-white/80">Nama Bank</label>
               <input
                 value={form.bankName}
                 onChange={(e) => setForm((f) => ({ ...f, bankName: e.target.value }))}
@@ -137,7 +137,7 @@ export default function WithdrawPage() {
               />
             </div>
             <div>
-              <label className="mb-1.5 block text-sm font-medium text-siroh-ink/80">Nomor Rekening</label>
+              <label className="mb-1.5 block text-sm font-medium text-siroh-ink/80 dark:text-white/80">Nomor Rekening</label>
               <input
                 value={form.accountNo}
                 onChange={(e) => setForm((f) => ({ ...f, accountNo: e.target.value }))}
@@ -145,7 +145,7 @@ export default function WithdrawPage() {
               />
             </div>
             <div>
-              <label className="mb-1.5 block text-sm font-medium text-siroh-ink/80">Nama Pemilik Rekening</label>
+              <label className="mb-1.5 block text-sm font-medium text-siroh-ink/80 dark:text-white/80">Nama Pemilik Rekening</label>
               <input
                 value={form.accountName}
                 onChange={(e) => setForm((f) => ({ ...f, accountName: e.target.value }))}
@@ -173,14 +173,14 @@ export default function WithdrawPage() {
         <div className="card p-6">
           <h2 className="font-display text-lg font-semibold">Riwayat Penarikan</h2>
           {withdrawals.length === 0 ? (
-            <p className="mt-4 text-sm text-siroh-ink/50">Belum ada riwayat penarikan.</p>
+            <p className="mt-4 text-sm text-siroh-ink/50 dark:text-white/50">Belum ada riwayat penarikan.</p>
           ) : (
             <div className="mt-4 space-y-3">
               {withdrawals.map((w) => (
-                <div key={w.id} className="flex items-center justify-between rounded-xl border border-siroh-green/10 p-3">
+                <div key={w.id} className="flex items-center justify-between rounded-xl border border-siroh-green/10 dark:border-white/10 p-3">
                   <div>
                     <p className="font-semibold">{formatRupiah(w.amount)}</p>
-                    <p className="text-xs text-siroh-ink/50">
+                    <p className="text-xs text-siroh-ink/50 dark:text-white/50">
                       {format(new Date(w.requested_at), 'd MMM yyyy', { locale: idLocale })} • {w.bank_name}
                     </p>
                   </div>

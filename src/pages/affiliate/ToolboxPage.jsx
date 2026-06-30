@@ -51,7 +51,7 @@ export default function ToolboxPage() {
     <div className="space-y-8">
       <div>
         <h1 className="font-display text-2xl font-semibold">Toolbox Promosi</h1>
-        <p className="mt-1 text-sm text-siroh-ink/60">
+        <p className="mt-1 text-sm text-siroh-ink/60 dark:text-white/60">
           Konten siap pakai supaya kamu tinggal salin-tempel, tanpa pusing mikir mau posting apa.
         </p>
       </div>
@@ -78,7 +78,7 @@ export default function ToolboxPage() {
                 {copiedIndex === i ? 'Tersalin' : 'Salin'}
               </button>
             </div>
-            <p className="mt-3 whitespace-pre-line rounded-xl bg-siroh-green/[0.04] p-4 text-sm leading-relaxed text-siroh-ink/75">
+            <p className="mt-3 whitespace-pre-line rounded-xl bg-siroh-ink/[0.04] p-4 text-sm leading-relaxed text-siroh-ink/75 dark:bg-white/[0.06] dark:text-white/80">
               {c.text.replace('{LINK}', refLink)}
             </p>
           </div>
@@ -87,17 +87,17 @@ export default function ToolboxPage() {
 
       <div className="space-y-4">
         <h2 className="font-display text-lg font-semibold">Template Visual</h2>
-        <p className="text-sm text-siroh-ink/55">
+        <p className="text-sm text-siroh-ink/55 dark:text-white/55">
           Unduh dan sesuaikan dengan tautanmu. (Template akan tersedia setelah aset desain ditambahkan oleh admin.)
         </p>
         <div className="grid gap-4 sm:grid-cols-3">
           {POSTER_IDEAS.map((p) => (
             <div key={p.title} className="card flex flex-col gap-3 p-5">
-              <div className="flex h-24 items-center justify-center rounded-xl bg-siroh-green/[0.06]">
-                <ImageIcon className="h-8 w-8 text-siroh-ink/25" />
+              <div className="flex h-24 items-center justify-center rounded-xl bg-siroh-ink/[0.04] dark:bg-white/[0.06]">
+                <ImageIcon className="h-8 w-8 text-siroh-ink/25 dark:text-white/25" />
               </div>
               <p className="text-sm font-semibold">{p.title}</p>
-              <p className="text-xs text-siroh-ink/55">{p.desc}</p>
+              <p className="text-xs text-siroh-ink/55 dark:text-white/55">{p.desc}</p>
               <button disabled className="btn-outline mt-1 text-xs opacity-50">
                 <Download className="h-3.5 w-3.5" /> Segera Hadir
               </button>

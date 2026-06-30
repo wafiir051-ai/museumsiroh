@@ -44,7 +44,7 @@ export default function CommissionsPage() {
     <div className="space-y-6">
       <div>
         <h1 className="font-display text-2xl font-semibold">Riwayat Komisi</h1>
-        <p className="mt-1 text-sm text-siroh-ink/60">Semua transaksi tiket yang masuk lewat tautanmu.</p>
+        <p className="mt-1 text-sm text-siroh-ink/60 dark:text-white/60">Semua transaksi tiket yang masuk lewat tautanmu.</p>
       </div>
 
       <div className="card flex items-center gap-4 p-6">
@@ -52,7 +52,7 @@ export default function CommissionsPage() {
           <Wallet className="h-5 w-5 text-siroh-green" />
         </div>
         <div>
-          <p className="text-xs text-siroh-ink/55">Total Komisi Terkonfirmasi</p>
+          <p className="text-xs text-siroh-ink/55 dark:text-white/55">Total Komisi Terkonfirmasi</p>
           <p className="font-display text-2xl font-semibold text-siroh-green">{formatRupiah(totalConfirmed)}</p>
         </div>
       </div>
@@ -63,7 +63,7 @@ export default function CommissionsPage() {
             key={f.key}
             onClick={() => setFilter(f.key)}
             className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
-              filter === f.key ? 'bg-siroh-green text-siroh-paper' : 'bg-siroh-green/10 text-siroh-ink/70'
+              filter === f.key ? 'bg-siroh-green text-siroh-paper' : 'bg-siroh-green/10 text-siroh-ink/70 dark:bg-white/10 dark:text-white/70'
             }`}
           >
             {f.label}
@@ -73,14 +73,14 @@ export default function CommissionsPage() {
 
       <div className="card overflow-hidden">
         {loading ? (
-          <p className="p-6 text-sm text-siroh-ink/50">Memuat…</p>
+          <p className="p-6 text-sm text-siroh-ink/50 dark:text-white/50">Memuat…</p>
         ) : filtered.length === 0 ? (
-          <p className="p-6 text-sm text-siroh-ink/50">Belum ada data untuk filter ini.</p>
+          <p className="p-6 text-sm text-siroh-ink/50 dark:text-white/50">Belum ada data untuk filter ini.</p>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-siroh-green/10 bg-siroh-green/[0.03] text-left text-xs uppercase tracking-wide text-siroh-ink/45">
+                <tr className="border-b border-siroh-green/10 dark:border-white/10 bg-siroh-green/[0.03] dark:bg-white/[0.04] text-left text-xs uppercase tracking-wide text-siroh-ink/45 dark:text-white/45">
                   <th className="px-6 py-3 font-medium">Order ID</th>
                   <th className="px-6 py-3 font-medium">Harga Tiket</th>
                   <th className="px-6 py-3 font-medium">Rate</th>
@@ -91,7 +91,7 @@ export default function CommissionsPage() {
               </thead>
               <tbody>
                 {filtered.map((c) => (
-                  <tr key={c.id} className="border-b border-siroh-green/5">
+                  <tr key={c.id} className="border-b border-siroh-green/5 dark:border-white/5">
                     <td className="px-6 py-3 font-mono text-xs">{c.order_id}</td>
                     <td className="px-6 py-3">{formatRupiah(c.ticket_amount)}</td>
                     <td className="px-6 py-3">{c.commission_rate}%</td>
@@ -99,7 +99,7 @@ export default function CommissionsPage() {
                     <td className="px-6 py-3">
                       <StatusBadge status={c.status} />
                     </td>
-                    <td className="px-6 py-3 text-siroh-ink/55">
+                    <td className="px-6 py-3 text-siroh-ink/55 dark:text-white/55">
                       {format(new Date(c.converted_at), 'd MMM yyyy, HH:mm', { locale: idLocale })}
                     </td>
                   </tr>

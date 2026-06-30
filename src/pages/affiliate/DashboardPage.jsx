@@ -19,7 +19,7 @@ function StatCard({ icon: Icon, label, value, accent }) {
         <Icon className="h-5 w-5" style={{ color: accent }} />
       </div>
       <div>
-        <p className="text-xs text-siroh-ink/55">{label}</p>
+        <p className="text-xs text-siroh-ink/55 dark:text-white/55">{label}</p>
         <p className="font-display text-xl font-semibold">{value}</p>
       </div>
     </div>
@@ -80,7 +80,7 @@ export default function DashboardPage() {
     <div className="space-y-8">
       <div>
         <h1 className="font-display text-2xl font-semibold">Halo, {affiliate.full_name?.split(' ')[0]} 👋</h1>
-        <p className="mt-1 text-sm text-siroh-ink/60">Ini ringkasan performamu sebagai mitra Museum Siroh.</p>
+        <p className="mt-1 text-sm text-siroh-ink/60 dark:text-white/60">Ini ringkasan performamu sebagai mitra Museum Siroh.</p>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -126,16 +126,16 @@ export default function DashboardPage() {
       <div className="card p-6">
         <h2 className="font-display text-lg font-semibold">Konversi Terbaru</h2>
         {loading ? (
-          <p className="mt-4 text-sm text-siroh-ink/50">Memuat…</p>
+          <p className="mt-4 text-sm text-siroh-ink/50 dark:text-white/50">Memuat…</p>
         ) : recentConversions.length === 0 ? (
-          <p className="mt-4 text-sm text-siroh-ink/50">
+          <p className="mt-4 text-sm text-siroh-ink/50 dark:text-white/50">
             Belum ada tiket terjual lewat tautanmu. Yuk mulai sebarkan di halaman Tautan & QR.
           </p>
         ) : (
           <div className="mt-4 overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-siroh-green/10 text-left text-xs uppercase tracking-wide text-siroh-ink/45">
+                <tr className="border-b border-siroh-green/10 dark:border-white/10 text-left text-xs uppercase tracking-wide text-siroh-ink/45 dark:text-white/45">
                   <th className="pb-2 font-medium">Order ID</th>
                   <th className="pb-2 font-medium">Harga Tiket</th>
                   <th className="pb-2 font-medium">Komisi</th>
@@ -145,14 +145,14 @@ export default function DashboardPage() {
               </thead>
               <tbody>
                 {recentConversions.map((c) => (
-                  <tr key={c.order_id} className="border-b border-siroh-green/5">
+                  <tr key={c.order_id} className="border-b border-siroh-green/5 dark:border-white/5">
                     <td className="py-3 font-mono text-xs">{c.order_id}</td>
                     <td className="py-3">{formatRupiah(c.ticket_amount)}</td>
                     <td className="py-3 font-semibold text-siroh-green">{formatRupiah(c.commission_amount)}</td>
                     <td className="py-3">
                       <StatusBadge status={c.status} />
                     </td>
-                    <td className="py-3 text-siroh-ink/55">
+                    <td className="py-3 text-siroh-ink/55 dark:text-white/55">
                       {format(new Date(c.converted_at), 'd MMM yyyy', { locale: idLocale })}
                     </td>
                   </tr>
