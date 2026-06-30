@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-siroh-paper text-siroh-ink font-body antialiased transition-colors duration-200;
+  }
+
+  .dark body {
+    @apply bg-siroh-charcoal text-white;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display;
+  }
+
+  :focus-visible {
+    outline: 2px solid #E8923C;
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-siroh-orange px-6 py-3
+           font-semibold text-white transition-all hover:bg-siroh-orangelight
+           focus-visible:outline-2 focus-visible:outline-siroh-orange active:scale-[0.98];
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border-2 border-siroh-teal
+           px-6 py-3 font-semibold text-siroh-teal transition-all hover:bg-siroh-teal hover:text-siroh-charcoal
+           active:scale-[0.98];
+  }
+
+  .card {
+    @apply rounded-2xl border border-siroh-ink/10 bg-white/70 backdrop-blur-sm shadow-sm transition-colors duration-200;
+  }
+
+  .dark .card {
+    @apply border-white/10 bg-siroh-charcoal2/80;
+  }
+
+  .input-field {
+    @apply w-full rounded-xl border border-siroh-ink/15 bg-white px-4 py-3 text-siroh-ink
+           placeholder:text-siroh-ink/40 focus:border-siroh-orange focus:outline-none
+           focus:ring-2 focus:ring-siroh-orange/30 transition-colors duration-200;
+  }
+
+  .dark .input-field {
+    @apply border-white/15 bg-siroh-charcoal3 text-white placeholder:text-white/30;
+  }
+
+  .lattice-bg {
+    background-image: radial-gradient(circle at 1px 1px, rgba(232,146,60,0.18) 1px, transparent 0);
+    background-size: 18px 18px;
+  }
+
+  .theme-toggle {
+    @apply flex h-9 w-9 items-center justify-center rounded-full border border-siroh-ink/15
+           text-siroh-ink/70 transition-colors hover:bg-siroh-ink/5;
+  }
+
+  .dark .theme-toggle {
+    @apply border-white/15 text-white/70 hover:bg-white/5;
+  }
+}
