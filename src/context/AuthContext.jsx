@@ -22,17 +22,41 @@ export function AuthProvider({ children }) {
     ])
     if (!affiliateRow) {
       const pendingRaw = sessionStorage.getItem('siroh_pending')
+      const { data: authUserData } = await supabase.auth.getUser()
+      const authUser = authUserData?.user
+
       if (pendingRaw) {
         try {
           const pending = JSON.parse(pendingRaw)
           const { data: newAff } = await supabase
             .from('affiliates')
-            .insert({ user_id: userId, email: (await supabase.auth.getUser()).data.user?.email, ...pending })
+            .insert({ user_id: userId, email: authUser?.email, ...pending })
             .select('*, tiers(name, commission_rate, badge_color, perks)')
             .single()
           sessionStorage.removeItem('siroh_pending')
           setAffiliate(newAff ?? null)
         } catch (e) {
+          setAffiliate(null)
+        }
+      } else if (authUser) {
+        // Kemungkinan daftar/login via Google OAuth, belum ada row affiliates.
+        // Buat otomatis pakai data dari profil Google (status pending, menunggu approval admin).
+        try {
+          const meta = authUser.user_metadata || {}
+          const fullName = meta.full_name || meta.name || authUser.email?.split('@')[0] || 'Mitra Baru'
+          const { data: newAff, error: createError } = await supabase
+            .from('affiliates')
+            .insert({ user_id: userId, email: authUser.email, full_name: fullName })
+            .select('*, tiers(name, commission_rate, badge_color, perks)')
+            .single()
+          if (createError) {
+            console.error('Gagal membuat profil affiliate dari OAuth:', createError)
+            setAffiliate(null)
+          } else {
+            setAffiliate(newAff ?? null)
+          }
+        } catch (e) {
+          console.error('Gagal membuat profil affiliate dari OAuth:', e)
           setAffiliate(null)
         }
       } else {
