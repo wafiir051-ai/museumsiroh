@@ -14,7 +14,7 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 // Helper untuk panggil edge function track-click (dipanggil dari halaman redirect publik)
 export async function trackClick(refCode, source = 'direct') {
   try {
-    await fetch(`${supabaseUrl}/functions/v1/track-click`, {
+    await fetch(`${supabaseUrl}/functions/v1/swift-endpoint`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ref_code: refCode, source }),
