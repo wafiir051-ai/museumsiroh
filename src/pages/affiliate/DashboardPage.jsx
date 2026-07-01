@@ -3,7 +3,7 @@ import { useAuth } from '@/context/AuthContext'
 import { supabase } from '@/lib/supabase'
 import { MousePointerClick, Ticket, Wallet, TrendingUp } from 'lucide-react'
 import {
-  ResponsiveContainer, AreaChart, Area, XAxis, YAxis, Tooltip, CartesianGrid,
+  ResponsiveContainer, BarChart, Bar, Cell, XAxis, YAxis, Tooltip, CartesianGrid,
 } from 'recharts'
 import { format, subDays, startOfDay } from 'date-fns'
 import { id as idLocale } from 'date-fns/locale'
@@ -56,12 +56,16 @@ export default function DashboardPage() {
 
       // Bangun data harian 14 hari terakhir
       const days = Array.from({ length: 14 }, (_, i) => startOfDay(subDays(new Date(), 13 - i)))
+      let prevCount = 0
       const counts = days.map((day) => {
         const dayStr = format(day, 'yyyy-MM-dd')
         const clickCount = (clicks ?? []).filter((c) => c.clicked_at.startsWith(dayStr)).length
+        const trend = clickCount >= prevCount ? 'up' : 'down'
+        prevCount = clickCount
         return {
           date: format(day, 'd MMM', { locale: idLocale }),
           klik: clickCount,
+          trend,
         }
       })
 
@@ -99,26 +103,37 @@ export default function DashboardPage() {
         />
       </div>
 
-      <div className="card p-6">
-        <h2 className="font-display text-lg font-semibold">Klik 14 Hari Terakhir</h2>
+      <div className="card p-6" style={{ backgroundColor: '#0d1117', borderColor: '#1f2937' }}>
+        <h2 className="font-display text-lg font-semibold text-white">Klik 14 Hari Terakhir</h2>
         <div className="mt-4 h-64">
           <ResponsiveContainer width="100%" height="100%">
-            <AreaChart data={chartData}>
+            <BarChart data={chartData} barCategoryGap="30%">
               <defs>
-                <linearGradient id="colorKlik" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#C9A84C" stopOpacity={0.35} />
-                  <stop offset="95%" stopColor="#C9A84C" stopOpacity={0} />
-                </linearGradient>
+                <filter id="barGlowUp" x="-50%" y="-50%" width="200%" height="200%">
+                  <feDropShadow dx="0" dy="0" stdDeviation="3" floodColor="#22c55e" floodOpacity="0.6" />
+                </filter>
+                <filter id="barGlowDown" x="-50%" y="-50%" width="200%" height="200%">
+                  <feDropShadow dx="0" dy="0" stdDeviation="3" floodColor="#ef4444" floodOpacity="0.6" />
+                </filter>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid, #1B4D3E1A)" vertical={false} />
-              <XAxis dataKey="date" tick={{ fontSize: 11, fill: 'var(--chart-text, #0F2C2299)' }} axisLine={false} tickLine={false} />
-              <YAxis tick={{ fontSize: 11, fill: 'var(--chart-text, #0F2C2299)' }} axisLine={false} tickLine={false} allowDecimals={false} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#1f2937" vertical={false} />
+              <XAxis dataKey="date" tick={{ fontSize: 11, fill: '#6b7280' }} axisLine={false} tickLine={false} />
+              <YAxis tick={{ fontSize: 11, fill: '#6b7280' }} axisLine={false} tickLine={false} allowDecimals={false} />
               <Tooltip
-                contentStyle={{ borderRadius: 12, border: '1px solid #1B4D3E1A', fontSize: 13 }}
-                labelStyle={{ fontWeight: 600 }}
+                contentStyle={{ borderRadius: 12, border: '1px solid #1f2937', fontSize: 13, backgroundColor: '#161b22', color: '#fff' }}
+                labelStyle={{ fontWeight: 600, color: '#fff' }}
+                cursor={{ fill: 'rgba(255,255,255,0.04)' }}
               />
-              <Area type="monotone" dataKey="klik" stroke="#C9A84C" strokeWidth={2} fill="url(#colorKlik)" />
-            </AreaChart>
+              <Bar dataKey="klik" radius={[3, 3, 0, 0]} maxBarSize={28}>
+                {chartData.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={entry.trend === 'up' ? '#22c55e' : '#ef4444'}
+                    filter={entry.trend === 'up' ? 'url(#barGlowUp)' : 'url(#barGlowDown)'}
+                  />
+                ))}
+              </Bar>
+            </BarChart>
           </ResponsiveContainer>
         </div>
       </div>
