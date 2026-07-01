@@ -29,9 +29,27 @@ const CAPTIONS = [
 ]
 
 const POSTER_IDEAS = [
-  { title: 'Poster Feed Instagram (1080x1080)', desc: 'Visual hero museum + QR code + headline singkat' },
-  { title: 'Story Instagram (1080x1920)', desc: 'Swipe-up style dengan tombol "Pesan Tiket"' },
-  { title: 'Flyer Cetak A5', desc: 'Untuk ditempel di masjid, sekolah, atau majelis taklim' },
+  {
+    title: 'Poster Feed Instagram (1080x1080)',
+    desc: 'Visual hero museum + QR code + headline singkat',
+    file: '/templates/poster_feed_instagram_1080x1080.png',
+    preview: '/templates/poster_feed_instagram_1080x1080.png',
+    filename: 'poster-feed-instagram-siroh.png',
+  },
+  {
+    title: 'Story Instagram (1080x1920)',
+    desc: 'Swipe-up style dengan tombol "Pesan Tiket"',
+    file: '/templates/story_instagram_1080x1920.png',
+    preview: '/templates/story_instagram_1080x1920.png',
+    filename: 'story-instagram-siroh.png',
+  },
+  {
+    title: 'Flyer Cetak A5',
+    desc: 'Untuk ditempel di masjid, sekolah, atau majelis taklim',
+    file: '/templates/flyer_cetak_a5.pdf',
+    preview: '/templates/flyer_cetak_a5_preview.png',
+    filename: 'flyer-a5-siroh.pdf',
+  },
 ]
 
 export default function ToolboxPage() {
@@ -93,14 +111,22 @@ export default function ToolboxPage() {
         <div className="grid gap-4 sm:grid-cols-3">
           {POSTER_IDEAS.map((p) => (
             <div key={p.title} className="card flex flex-col gap-3 p-5">
-              <div className="flex h-24 items-center justify-center rounded-xl bg-siroh-ink/[0.04] dark:bg-white/[0.06]">
-                <ImageIcon className="h-8 w-8 text-siroh-ink/25 dark:text-white/25" />
+              <div className="flex h-24 items-center justify-center overflow-hidden rounded-xl bg-siroh-ink/[0.04] dark:bg-white/[0.06]">
+                {p.preview ? (
+                  <img src={p.preview} alt={p.title} className="h-full w-full object-cover" />
+                ) : (
+                  <ImageIcon className="h-8 w-8 text-siroh-ink/25 dark:text-white/25" />
+                )}
               </div>
               <p className="text-sm font-semibold">{p.title}</p>
               <p className="text-xs text-siroh-ink/55 dark:text-white/55">{p.desc}</p>
-              <button disabled className="btn-outline mt-1 text-xs opacity-50">
-                <Download className="h-3.5 w-3.5" /> Segera Hadir
-              </button>
+              <a
+                href={p.file}
+                download={p.filename}
+                className="btn-outline mt-1 text-xs"
+              >
+                <Download className="h-3.5 w-3.5" /> Unduh
+              </a>
             </div>
           ))}
         </div>
